@@ -3,7 +3,7 @@
 with raw_channels as (
     select
         CAMPAIGN_ID,
-        CAMPAIGN_NAME,
+        CCAMPAIGN_NAME,
         CAMPAIGN_PERIOD_BUDGET_CATEGORY,
         CHANNEL_3,
         CHANNEL_4,
@@ -13,7 +13,7 @@ with raw_channels as (
 
 select
     CAMPAIGN_ID as campaign_id,
-    CAMPAIGN_NAME as campaign_name,
+    CCAMPAIGN_NAME as campaign_name,
     CAMPAIGN_PERIOD_BUDGET_CATEGORY as budget_category,
     CHANNEL_3 as channel_3,
     CHANNEL_4 as channel_4,
