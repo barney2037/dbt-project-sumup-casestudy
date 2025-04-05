@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw
+    database: SUMUP_CASE
+    schema: RAW
+    tables:
+      - name: WEB_ORDERS
+      - name: LEADS_FUNNEL
+      - name: CHANNELS
