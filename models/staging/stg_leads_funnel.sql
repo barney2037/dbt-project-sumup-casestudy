@@ -20,7 +20,7 @@ with raw_leads_funnel as (
         TOTAL_MEETING_DONE,
         TOTAL_SIGNED_LEADS,
         TOTAL_POS_LITE_DEALS
-    from {{ source('raw', 'leads_funnel') }}  -- Source the raw data from raw schema
+    from {{ source('raw', 'LEADS_FUNNEL') }}  -- Source the raw data from raw schema
 )
 
 select

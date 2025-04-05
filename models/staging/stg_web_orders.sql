@@ -11,7 +11,7 @@ with raw_web_orders as (
         NB_OF_ORDERS,
         NB_OF_POSLITE_ITEMS_ORDERED,
         NB_POSLITE_ITEMS_DISPATCHED
-    from {{ source('raw', 'web_orders') }}  -- Source the raw data from raw schema
+    from {{ source('raw', 'WEB_ORDERS') }}  -- Source the raw data from raw schema
 )
 
 select
