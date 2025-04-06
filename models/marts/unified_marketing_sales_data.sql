@@ -66,9 +66,13 @@ with unified_data as (
 select
     activity_date,
     country,
-    campaign_id,
-    product,
     source,
+    campaign_id,
+    CAMPAIGN_NAME,
+    CHANNEL_3,
+    CHANNEL_4,
+    CHANNEL_5
+    product,
     total_orders,
     total_poslite_items_ordered,
     total_sessions,
@@ -81,9 +85,6 @@ select
     total_sqls,
     total_meeting_done,
     total_signed_leads,
-    total_poslite_deals,
-    CAMPAIGN_NAME,
-    CHANNEL_3,
-    CHANNEL_4,
-    CHANNEL_5
+    total_poslite_deals
+   
 from unified_data
