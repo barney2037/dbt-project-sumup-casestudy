@@ -16,19 +16,19 @@ with raw_web_orders as (
 
 select
     -- Clean and uppercase the DATE column
-    DATE as website_date,
+    DATE as DATE,
 
     -- Clean and uppercase COUNTRY_CODE
     case 
         when COUNTRY_CODE is null then 'UNKNOWN_COUNTRY' -- Default value for NULL country code
         else upper(trim(COUNTRY_CODE)) -- Clean and uppercase the country code
-    end as country_code,
+    end as COUNTRY_CODE,
 
     -- Clean and uppercase CAMPAIGN_ID
     case 
         when CAMPAIGN_ID is null then 'UNKNOWN_CAMPAIGN' -- Default value for NULL campaign ID
         else upper(trim(CAMPAIGN_ID)) -- Clean and uppercase the campaign ID
-    end as campaign_id,
+    end as CAMPAIGN_ID,
 
     -- Use COALESCE to replace NULL values with 0 for numeric fields
     COALESCE(TOTAL_SPEND_EUR, 0) as total_spend_eur,

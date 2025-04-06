@@ -25,55 +25,55 @@ with raw_leads_funnel as (
 
 select
     -- Clean and uppercase the DATE column (if necessary)
-    DATE as lead_date,
+    DATE as DATE,
     
     -- Clean and uppercase CURRENCY (if necessary)
     case 
         when CURRENCY is null then 'UNKNOWN_CURRENCY' -- Default value for NULL currency
         else upper(trim(CURRENCY)) -- Clean and uppercase the currency
-    end as currency,
+    end as CURRENCY,
 
     -- Clean and uppercase COUNTRY_CODE
     case 
         when COUNTRY_CODE is null then 'UNKNOWN_COUNTRY' -- Default value for NULL country code
         else upper(trim(COUNTRY_CODE)) -- Clean and uppercase the country code
-    end as country_code,
+    end as countryCOUNTRY_CODE_code,
 
     -- Clean and uppercase CAMPAIGN_ID
     case 
         when CAMPAIGN_ID is null then 'UNKNOWN_CAMPAIGN' -- Default value for NULL campaign ID
         else upper(trim(CAMPAIGN_ID)) -- Clean and uppercase the campaign ID
-    end as campaign_id,
+    end as CAMPAIGN_ID,
 
     -- Clean and uppercase CAMPAIGN_NAME
     case 
         when CAMPAIGN_NAME is null then 'UNKNOWN_CAMPAIGN_NAME' -- Default value for NULL campaign name
         else upper(trim(CAMPAIGN_NAME)) -- Clean and uppercase the campaign name
-    end as campaign_name,
+    end as CAMPAIGN_NAME,
 
     -- Clean and uppercase PRODUCT
     case 
         when PRODUCT is null then 'UNKNOWN_PRODUCT' -- Default value for NULL product
         else upper(trim(PRODUCT)) -- Clean and uppercase the product name
-    end as product,
+    end as PRODUCT,
 
     -- Clean and uppercase CHANNEL_3
     case 
         when CHANNEL_3 is null then 'UNKNOWN_CHANNEL_3' -- Default value for NULL channel 3
         else upper(trim(CHANNEL_3)) -- Clean and uppercase channel 3
-    end as channel_3,
+    end as CHANNEL_3,
 
     -- Clean and uppercase CHANNEL_4
     case 
         when CHANNEL_4 is null then 'UNKNOWN_CHANNEL_4' -- Default value for NULL channel 4
         else upper(trim(CHANNEL_4)) -- Clean and uppercase channel 4
-    end as channel_4,
+    end as CHANNEL_4,
 
     -- Clean and uppercase CHANNEL_5
     case 
         when CHANNEL_5 is null then 'UNKNOWN_CHANNEL_5' -- Default value for NULL channel 5
         else upper(trim(CHANNEL_5)) -- Clean and uppercase channel 5
-    end as channel_5,
+    end as CHANNEL_5,
 
     -- Use COALESCE to replace NULL values with 0 for numeric fields
     COALESCE(TOTAL_IMPRESSIONS, 0) as total_impressions,
