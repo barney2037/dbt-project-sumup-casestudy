@@ -64,6 +64,10 @@ with unified_data as (
 
 -- Final selection of unified data for reporting
 select
+    year(activity_date) as year,
+    quarter(activity_date) as quarter,
+    month(activity_date) as month,
+    week(activity_date) as week,
     activity_date,
     country,
     source,
