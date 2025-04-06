@@ -16,7 +16,7 @@ with raw_web_orders as (
 
 select
     -- Clean and uppercase the DATE column
-    DATE as DATE,
+    DATE as WEB_DATE,
 
     -- Clean and uppercase COUNTRY_CODE
     case 

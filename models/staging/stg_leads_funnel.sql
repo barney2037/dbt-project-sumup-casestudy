@@ -25,7 +25,7 @@ with raw_leads_funnel as (
 
 select
     -- Clean and uppercase the DATE column (if necessary)
-    DATE as DATE,
+    DATE as LEAD_DATE,
     
     -- Clean and uppercase CURRENCY (if necessary)
     case 
@@ -37,7 +37,7 @@ select
     case 
         when COUNTRY_CODE is null then 'UNKNOWN_COUNTRY' -- Default value for NULL country code
         else upper(trim(COUNTRY_CODE)) -- Clean and uppercase the country code
-    end as countryCOUNTRY_CODE_code,
+    end as COUNTRY_CODE,
 
     -- Clean and uppercase CAMPAIGN_ID
     case 
