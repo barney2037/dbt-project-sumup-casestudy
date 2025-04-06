@@ -25,7 +25,7 @@ models:
   my_new_project:
     # This applies to all models under models/staging/
     staging:
-      +schema: raw  # This ensures the staging models are stored in the 'raw' schema
+      +schema:  # This ensures the staging models are stored in the 'raw' schema
       +materialized: view  # You can change this to 'table' if you want staging models as tables
 
     # Default configurations for other folders, if necessary
