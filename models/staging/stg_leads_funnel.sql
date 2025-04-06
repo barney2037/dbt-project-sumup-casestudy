@@ -1,5 +1,3 @@
--- models/staging/stg_leads_funnel.sql
-
 
 WITH raw_leads_funnel AS (
     SELECT
@@ -21,7 +19,7 @@ WITH raw_leads_funnel AS (
         TOTAL_MEETING_DONE,
         TOTAL_SIGNED_LEADS,
         TOTAL_POS_LITE_DEALS
-    FROM {{ source('DBT_BYUKSEL', 'LEADS_FUNNEL') }}  -- Source the raw data from raw schema
+    FROM {{ source('DBT_BYUKSEL', 'LEADS_FUNNEL') }}  -- Ensure this refers to the correct raw table in Snowflake
 )
 
 SELECT
