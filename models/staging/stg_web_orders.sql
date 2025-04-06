@@ -33,8 +33,12 @@ select
     -- Numeric metrics with COALESCE and casting
     COALESCE(TOTAL_SPEND_EUR, 0)::FLOAT as TOTAL_SPEND_EUR,
     COALESCE(NB_OF_SESSIONS, 0)::INT as NB_OF_SESSIONS,
-    COALESCE(NB_OF_SIGNUPS, 0)::INT as NB_OF_SIGNUPS,
-    COALESCE(NB_OF_ORDERS, 0)::INT as NB_OF_ORDERS,
+-- Handle NB_OF_SIGNUPS: If 'f', replace with 0 (or NULL)
+    case
+        when NB_OF_SIGNUPS = 'f' then 0  -- Replace 'f' with 0 (or NULL if preferred)
+        when NB_OF_SIGNUPS = '' then 0  -- Replace empty strings with 0
+        else TRY_CAST(NB_OF_SIGNUPS AS INT)  -- Convert to integer if valid
+    end as NB_OF_SIGNUPS,    COALESCE(NB_OF_ORDERS, 0)::INT as NB_OF_ORDERS,
     COALESCE(NB_OF_POSLITE_ITEMS_ORDERED, 0)::INT as NB_OF_POSLITE_ITEMS_ORDERED,
     COALESCE(NB_POSLITE_ITEMS_DISPATCHED, 0)::INT as NB_POSLITE_ITEMS_DISPATCHED
 
