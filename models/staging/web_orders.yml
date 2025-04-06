@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: stg_web_orders
+    description: "Staging table for web orders data"
+    columns:
+      - name: DATE
+        description: "Date of the web activity"
+        tests:
+          - not_null: {}  # Ensure DATE is not null
+      - name: COUNTRY_CODE
+        description: "Country of the user"
+        tests:
+          - not_null: {}  # Ensure COUNTRY_CODE is not null
+      - name: CAMPAIGN_ID
+        description: "ID of the marketing campaign driving the traffic"
+        tests:
+          - not_null: {}  # Ensure CAMPAIGN_ID is not null
+      - name: TOTAL_SPEND_EUR
+        description: "Total spend on marketing for that day in EUR"
+        tests:
+          - not_null: {}  # Ensure TOTAL_SPEND_EUR is not null
+          - accepted_values:  # Ensure TOTAL_SPEND_EUR is a positive value
+              values: [0, 'positive']  
+      - name: NB_OF_SESSIONS
+        description: "Number of website sessions"
+        tests:
+          - not_null: {}  # Ensure NB_OF_SESSIONS is not null
+          - accepted_values:  # Ensure NB_OF_SESSIONS is a positive value
+              values: [0, 'positive']
+      - name: NB_OF_SIGNUPS
+        description: "Number of user signups"
+        tests:
+          - not_null: {}  # Ensure NB_OF_SIGNUPS is not null
+          - accepted_values:  # Ensure NB_OF_SIGNUPS is a positive value
+              values: [0, 'positive']
+      - name: NB_OF_ORDERS
+        description: "Number of orders placed"
+        tests:
+          - not_null: {}  # Ensure NB_OF_ORDERS is not null
+          - accepted_values:  # Ensure NB_OF_ORDERS is a positive value
+              values: [0, 'positive']
+      - name: NB_OF_POSLITE_ITEMS_ORDERED
+        description: "Number of POS Lite items ordered"
+        tests:
+          - not_null: {}  # Ensure NB_OF_POSLITE_ITEMS_ORDERED is not null
+          - accepted_values:  # Ensure NB_OF_POSLITE_ITEMS_ORDERED is a positive value
+              values: [0, 'positive']
+      - name: NB_POSLITE_ITEMS_DISPATCHED
+        description: "Number of POS Lite items dispatched"
+        tests:
+          - not_null: {}  # Ensure NB_POSLITE_ITEMS_DISPATCHED is not null
+          - accepted_values:  # Ensure NB_POSLITE_ITEMS_DISPATCHED is a positive value
+              values: [0, 'positive']

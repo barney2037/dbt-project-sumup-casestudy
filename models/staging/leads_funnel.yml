@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: stg_leads_funnel
+    description: "Staging table for the leads funnel"
+    columns:
+      - name: DATE
+        description: "Date of the lead activity"
+        tests:
+          - not_null: {}  # Ensure DATE is not null
+      - name: COUNTRY_CODE
+        description: "Country of the lead"
+        tests:
+          - not_null: {}  # Ensure COUNTRY_CODE is not null
+      - name: CAMPAIGN_ID
+        description: "ID of the marketing campaign"
+        tests:
+          - not_null: {}  # Ensure CAMPAIGN_ID is not null
+      - name: CURRENCY
+        description: "Currency used for spend"
+        tests:
+          - not_null: {}  # Ensure CURRENCY is not null
+      - name: TOTAL_IMPRESSIONS
+        description: "Total ad impressions served"
+        tests:
+          - not_null: {}  # Ensure TOTAL_IMPRESSIONS is not null
+          - accepted_values:  # Ensure TOTAL_IMPRESSIONS is a positive value
+              values: [0, 'positive'] 
+      - name: TOTAL_CLICKS
+        description: "Total ad clicks generated"
+        tests:
+          - not_null: {}  # Ensure TOTAL_CLICKS is not null
+          - accepted_values:  # Ensure TOTAL_CLICKS is a positive value
+              values: [0, 'positive'] 
+      - name: TOTAL_SPEND
+        description: "Total spend on the campaign"
+        tests:
+          - not_null: {}  # Ensure TOTAL_SPEND is not null
+          - accepted_values:  # Ensure TOTAL_SPEND is a positive value
+              values: [0, 'positive']  
+      - name: TOTAL_LEADS
+        description: "Total number of leads generated"
+        tests:
+          - not_null: {}  # Ensure TOTAL_LEADS is not null
+          - accepted_values:  # Ensure TOTAL_LEADS is a positive value
+              values: [0, 'positive']
+      - name: TOTAL_FAKE_LEADS
+        description: "Number of fake leads"
+        tests:
+          - not_null: {}  # Ensure TOTAL_FAKE_LEADS is not null
+          - accepted_values:  # Ensure TOTAL_FAKE_LEADS is a positive value
+              values: [0, 'positive']
+      - name: TOTAL_SQLS
+        description: "Sales-qualified leads"
+        tests:
+          - not_null: {}  # Ensure TOTAL_SQLS is not null
+          - accepted_values:  # Ensure TOTAL_SQLS is a positive value
+              values: [0, 'positive'] 
+      - name: TOTAL_MEETING_DONE
+        description: "Number of meetings conducted"
+        tests:
+          - not_null: {}  # Ensure TOTAL_MEETING_DONE is not null
+          - accepted_values:  # Ensure TOTAL_MEETING_DONE is a positive value
+              values: [0, 'positive']
+      - name: TOTAL_SIGNED_LEADS
+        description: "Leads that signed agreements"
+        tests:
+          - not_null: {}  # Ensure TOTAL_SIGNED_LEADS is not null
+          - accepted_values:  # Ensure TOTAL_SIGNED_LEADS is a positive value
+              values: [0, 'positive']
+      - name: TOTAL_POS_LITE_DEALS
+        description: "Number of POS Lite deals finalized"
+        tests:
+          - not_null: {}  # Ensure TOTAL_POS_LITE_DEALS is not null
+          - accepted_values:  # Ensure TOTAL_POS_LITE_DEALS is a positive value
+              values: [0, 'positive'] 
+
