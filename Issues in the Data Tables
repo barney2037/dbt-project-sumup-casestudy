@@ -1,0 +1,13 @@
+Web Order Table:
+-Normally, column J has no data. However, the row 203 has a value in the columnn J and that's causing an issue while uploading the csv file to the snowflake as the header was empy.
+-Also, there are some rows missing the campaign id information, not an ideal data structure.
+
+Campaign Table:
+-There are duplication in the table.
+-The naming structure can be improved by updating the channel 4- and channel 5 naming structure.
+--Channel 4: 
+  Old:fb-prospecting --> Suggestiong: prospecting.  - As fb is already labeled in the channel 3 column and no need to add it here again.
+--Channel 5:
+  Old: fb-prospecting-landing --> landing. - As fb and prospecting are already labeled in the channel 3 and channel 4. 
+
+With above sugggestions, we would be able to compare the performance of each channel (fb, search, organic) for the landing, generic, channel 5. Enabling us to assess the effectives of the campaign and better readability.
