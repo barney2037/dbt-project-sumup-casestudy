@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: raw
+  - name: DBT_BYUKSEL
     database: SUMUP_CASE
-    schema: RAW
+    schema: DBT_BYUKSEL
     tables:
       - name: WEB_ORDERS
       - name: LEADS_FUNNEL

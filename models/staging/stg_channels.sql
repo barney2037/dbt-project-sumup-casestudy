@@ -8,7 +8,7 @@ with raw_channels as (
         CHANNEL_3,
         CHANNEL_4,
         CHANNEL_5
-    from {{ source('raw', 'CHANNELS') }}  -- Source the raw data from raw schema
+    from {{ source('DBT_BYUKSEL', 'CHANNELS') }}  -- Source the raw data from raw schema
 )
 
 select

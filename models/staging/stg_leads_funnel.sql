@@ -1,7 +1,8 @@
 -- models/staging/stg_leads_funnel.sql
 
-with raw_leads_funnel as (
-    select
+
+WITH raw_leads_funnel AS (
+    SELECT
         DATE,
         COUNTRY_CODE,
         CAMPAIGN_ID,
@@ -20,26 +21,26 @@ with raw_leads_funnel as (
         TOTAL_MEETING_DONE,
         TOTAL_SIGNED_LEADS,
         TOTAL_POS_LITE_DEALS
-    from {{ source('raw', 'LEADS_FUNNEL') }}  -- Source the raw data from raw schema
+    FROM {{ source('DBT_BYUKSEL', 'LEADS_FUNNEL') }}  -- Source the raw data from raw schema
 )
 
-select
-    DATE as lead_date,
-    COUNTRY_CODE as country,
-    CAMPAIGN_ID as campaign_id,
-    CAMPAIGN_NAME as campaign_name,
-    CURRENCY as currency,
-    PRODUCT as product,
-    CHANNEL_3 as channel_3,
-    CHANNEL_4 as channel_4,
-    CHANNEL_5 as channel_5,
-    TOTAL_IMPRESSIONS as impressions,
-    TOTAL_CLICKS as clicks,
-    TOTAL_SPEND as spend,
-    TOTAL_LEADS as leads,
-    TOTAL_FAKE_LEADS as fake_leads,
-    TOTAL_SQLS as sqls,
-    TOTAL_MEETING_DONE as meetings_done,
-    TOTAL_SIGNED_LEADS as signed_leads,
-    TOTAL_POS_LITE_DEALS as pos_lite_deals
-from raw_leads_funnel
+SELECT
+    DATE AS lead_date,
+    COUNTRY_CODE AS country,
+    CAMPAIGN_ID AS campaign_id,
+    CAMPAIGN_NAME AS campaign_name,
+    CURRENCY AS currency,
+    PRODUCT AS product,
+    CHANNEL_3 AS channel_3,
+    CHANNEL_4 AS channel_4,
+    CHANNEL_5 AS channel_5,
+    TOTAL_IMPRESSIONS AS impressions,
+    TOTAL_CLICKS AS clicks,
+    TOTAL_SPEND AS spend,
+    TOTAL_LEADS AS leads,
+    TOTAL_FAKE_LEADS AS fake_leads,
+    TOTAL_SQLS AS sqls,
+    TOTAL_MEETING_DONE AS meetings_done,
+    TOTAL_SIGNED_LEADS AS signed_leads,
+    TOTAL_POS_LITE_DEALS AS pos_lite_deals
+FROM raw_leads_funnel;
