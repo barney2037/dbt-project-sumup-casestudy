@@ -41,4 +41,4 @@ SELECT
     TOTAL_MEETING_DONE AS meetings_done,
     TOTAL_SIGNED_LEADS AS signed_leads,
     TOTAL_POS_LITE_DEALS AS pos_lite_deals
-FROM raw_leads_funnel;
+FROM raw_leads_funnel
