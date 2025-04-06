@@ -89,7 +89,7 @@ The data models support a funnel-based analysis:
 
 - **Join Data:** Use `CAMPAIGN_ID` to join `WEB_ORDERS`, `LEADS_FUNNEL`, and `CHANNELS`.
 - **Normalize Spend:** Consider converting all currencies to EUR if needed.
-- **Aggregate by:** `DATE`, `COUNTRY`, `CAMPAIGN`, and `CHANNEL` levels.
+- **Aggregate by:** `DATE`, `COUNTRY`,`PRODUCT`, `CAMPAIGN`, and `CHANNEL` levels.
 - **Derive KPIs:** Use `dbt` to build transformations and expose metrics to dashboards.
 
 ---
@@ -137,11 +137,11 @@ As `leads_funnel` may use different currencies, normalize all monetary values (s
 - A daily `exchange_rates` table
 - Or adding a standardized `price_eur` field in `product_prices`
 
-### 💱 4. **New Column: `customer_category` in Leads Funnel Table**
+#### 💱 4. **New Column: `customer_category` in Leads Funnel Table**
 
 To improve the granularity of lead data, I suggest adding a **customer category** column to the **Leads Funnel** table. This will allow the marketing team to better segment and analyze lead progression through the funnel based on customer categories. It will enable tracking of leads according to their spending behavior and frequency, which will help in improving lead conversion strategies.
 
-#### **Leads Funnel Table (`leads_funnel`) with `customer_category`**
+##### **Leads Funnel Table (`leads_funnel`) with `customer_category`**
 
 | **lead_id** | **date** | **country_code** | **campaign_id** | **campaign_name** | **currency** | **product** | **channel_3** | **channel_4** | **channel_5** | **total_impressions** | **total_clicks** | **total_spend** | **total_leads** | **total_fake_leads** | **total_sqls** | **total_meeting_done** | **total_signed_leads** | **total_pos_lite_deals** | **customer_category** |
 |-------------|----------|------------------|-----------------|------------------|--------------|-------------|---------------|---------------|---------------|-----------------------|------------------|-----------------|-----------------|----------------------|----------------|-----------------------|------------------------|------------------------|----------------------|
@@ -151,7 +151,7 @@ To improve the granularity of lead data, I suggest adding a **customer category*
 
 ---
 
-### **Why Add `customer_category` to the Leads Funnel Table?**
+##### **Why Add `customer_category` to the Leads Funnel Table?**
 
 By adding this **customer category** field, the **Leads Funnel** data becomes more granular, allowing you to:
 
