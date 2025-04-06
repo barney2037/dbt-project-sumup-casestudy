@@ -15,7 +15,7 @@ with raw_web_orders as (
 )
 
 select
-    DATE as order_date,
+    DATE as website_date,
     COUNTRY_CODE as country,
     CAMPAIGN_ID as campaign_id,
     TOTAL_SPEND_EUR as spend_eur,
