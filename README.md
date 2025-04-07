@@ -94,7 +94,6 @@ The analysis follows a funnel-based approach:
    Create a table with product prices to estimate revenue and calculate KPIs like:
    - **Estimated Revenue** = `NB_OF_POSLITE_ITEMS_ORDERED * price_eur`
    - **ROAS** = `Estimated Revenue / Total Spend`
-   - **CAC** = `Total Spend / Total Signed Leads`
 
 2. **Attribution Beyond Last Click**
 
