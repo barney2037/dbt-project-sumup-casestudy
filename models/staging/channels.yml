@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_channels
+    description: "Staging table for the marketing channels data"
+    columns:
+      - name: CAMPAIGN_ID
+        description: "Unique identifier for the marketing campaign"
+        tests:
+          - not_null: {}  # Ensure CAMPAIGN_ID is not null
+          - unique: {}  # Ensure CAMPAIGN_ID is unique
+      - name: CAMPAIGN_NAME
+        description: "Name of the marketing campaign"
+        tests:
+          - not_null: {}  # Ensure CAMPAIGN_NAME is not null
+      - name: CAMPAIGN_PERIOD_BUDGET_CATEGORY
+        description: "Time period or budget category for the campaign"
+        tests:
+          - not_null: {}  # Ensure CAMPAIGN_PERIOD_BUDGET_CATEGORY is not null
+      - name: CHANNEL_3
+        description: "Broad marketing channel (e.g., Facebook, Bing)"
+        tests:
+          - not_null: {}  # Ensure CHANNEL_3 is not null
+      - name: CHANNEL_4
+        description: "Specific type of marketing campaign (e.g., prospecting)"
+        tests:
+          - not_null: {}  # Ensure CHANNEL_4 is not null
+      - name: CHANNEL_5
+        description: "Further sub-categorization of the marketing campaign"
+        tests:
+          - not_null: {}  # Ensure CHANNEL_5 is not null
