@@ -37,10 +37,26 @@ This file outlines the steps taken to identify and resolve various data issues f
 2. **Missing Campaign Names**:
     - Some **CampaignIDs** are missing corresponding **Campaign Names**, even though the CampaignID exists elsewhere in the data. This gap needs to be addressed for accurate campaign tracking.
 
+3. **Improvement in Naming Structure for Channels 4 and 5**:
+    - The naming convention in **Channel 4** and **Channel 5** can be improved to enhance readability and consistency across the dataset:
+    
+    - **Channel 4**:
+      - **Old Name**: `fb-prospecting`
+      - **Suggested Name**: `prospecting`
+      - **Reason**: As "fb" (Facebook) is already labeled in **Channel 3**, it is redundant to repeat it here. Simplifying the name to just `prospecting` would make the data cleaner and more concise.
+    
+    - **Channel 5**:
+      - **Old Name**: `fb-prospecting-landing`
+      - **Suggested Name**: `landing`
+      - **Reason**: "fb" (Facebook) and "prospecting" are already accounted for in **Channels 3** and **4**, so these terms don't need to be repeated in **Channel 5**. Simplifying the name to `landing` enhances clarity.
+
+    - **Impact**: With these naming suggestions, we will be able to compare the performance of different channels (such as **fb**, **search**, and **organic**) for various campaigns (such as **landing**, **generic**, and **channel 5**). This will enable more accurate assessments of campaign effectiveness and improve readability for data analysis.
+
 ### Solutions
 
 - **Data Consistency**: Implement data quality checks to enforce unique **CampaignIDs** and prevent any variation in campaign names (e.g., spaces or special characters) when inputting data.
 - **Remove Null Entries**: Introduce logic to remove rows with **null** campaign names and ensure every **CampaignID** is paired with its respective **Campaign Name**.
+- **Naming Structure Standardization**: Update the naming structure for **Channel 4** and **Channel 5** to reflect the suggestions above. This will improve readability and allow for better comparison of campaign performance.
 
 ---
 
@@ -54,9 +70,14 @@ This file outlines the steps taken to identify and resolve various data issues f
 2. **Missing Campaign IDs**:
     - There are instances where **CampaignIDs** are missing, but the corresponding **Campaign Name** is available. This missing data should be controlled at the source and handled properly in the data pipeline.
 
+3. **CampaignID Validation**:
+    - **Suggestion**: The **CampaignID** column should be validated against the **CampaignIDs** listed in the **Campaign Table** to ensure consistency and accuracy. For example, **CampaignIDs** like **11348193304807181773** and **120207888497020698** are present in the **Leads Funnel Table**, but they are not registered in the **Campaign Table**. 
+    - **Impact**: Since these **CampaignIDs** are not recognized in the source table, the campaigns cannot be identified or mapped correctly. This issue may have been caused by a typo during data entry, but it is not considered best practice to allow such discrepancies in the data. Implementing a validation step to cross-check **CampaignIDs** with the **Campaign Table** would improve data integrity and ensure that each campaign can be correctly mapped.
+
 ### Solutions
 
 - **Standardize Campaign ID Data Type**: Ensure that all **CampaignIDs** are consistently stored as integers, excluding any decimal values during data processing.
 - **Map Missing Campaign IDs**: Set up mapping rules to link **Campaign Names** to their respective **CampaignIDs**, ensuring no campaign is left unmapped.
+- **CampaignID Validation**: Implement a validation process to ensure that **CampaignIDs** in the **Leads Funnel** dataset exist in the **Campaign Table**. Any **CampaignIDs** that do not match should be flagged and reviewed, helping to prevent data discrepancies caused by typos or incomplete mappings.
 
----
+
