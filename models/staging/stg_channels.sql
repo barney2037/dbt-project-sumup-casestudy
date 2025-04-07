@@ -12,22 +12,12 @@ with raw_channels as (
 )
 
 select
-    -- Clean and standardize CAMPAIGN_ID
+    -- Textual metadata cleaned and uppercased
     COALESCE(UPPER(TRIM(CAMPAIGN_ID)), 'UNKNOWN_CAMPAIGN') as CAMPAIGN_ID,
-
-    -- Clean and standardize CAMPAIGN_NAME
     COALESCE(UPPER(TRIM(CAMPAIGN_NAME)), 'UNKNOWN_CAMPAIGN_NAME') as CAMPAIGN_NAME,
-
-    -- Clean and standardize CAMPAIGN_PERIOD_BUDGET_CATEGORY
     COALESCE(UPPER(TRIM(CAMPAIGN_PERIOD_BUDGET_CATEGORY)), 'UNKNOWN') as CAMPAIGN_PERIOD_BUDGET_CATEGORY,
-
-    -- Clean and standardize CHANNEL_3
     COALESCE(UPPER(TRIM(CHANNEL_3)), 'UNKNOWN_CHANNEL_3') as CHANNEL_3,
-
-    -- Clean and standardize CHANNEL_4
     COALESCE(UPPER(TRIM(CHANNEL_4)), 'UNKNOWN_CHANNEL_4') as CHANNEL_4,
-
-    -- Clean and standardize CHANNEL_5
     COALESCE(UPPER(TRIM(CHANNEL_5)), 'UNKNOWN_CHANNEL_5') as CHANNEL_5
 
 from raw_channels
