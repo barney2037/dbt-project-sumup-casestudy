@@ -79,3 +79,5 @@ This file outlines the steps taken to identify and resolve various data issues f
 - **Standardize Campaign ID Data Type**: Ensure that all **CampaignIDs** are consistently stored as integers, excluding any decimal values during data processing.
 - **Map Missing Campaign IDs**: Set up mapping rules to link **Campaign Names** to their respective **CampaignIDs**, ensuring no campaign is left unmapped.
 - **CampaignID Validation**: Implement a validation process to ensure that **CampaignIDs** in the **Leads Funnel** dataset exist in the **Campaign Table**. Any **CampaignIDs** that do not match should be flagged and reviewed, helping to prevent data discrepancies caused by typos or incomplete mappings.
+
+

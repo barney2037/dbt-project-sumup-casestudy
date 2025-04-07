@@ -1,36 +1,27 @@
 # dbt-project-sumup-casestudy
 
-**Created by:** Baris Yuksel
-**Created at:** 2025/04/06
+**Created by:** Baris Yuksel  
+**Created at:** 2025/04/07
 
-**Question 1**: What are the main KPIs the Mission Lead should track to answer their business question? 
-How will you build these metrics? What are the different steps we should track?  
+## Objective
 
-# 📊 KPI Strategy for Marketing Funnel Performance
-
-This repository documents the approach to defining, calculating, and tracking core marketing and sales KPIs based on the provided datasets: `WEB_ORDERS`, `CHANNELS`, and `LEADS_FUNNEL`.
+This project focuses on defining, calculating, and tracking key performance indicators (KPIs) across the marketing funnel using the provided datasets: `WEB_ORDERS`, `CHANNELS`, and `LEADS_FUNNEL`. These KPIs help the **Mission Lead** assess how marketing efforts are driving business outcomes, from impressions to signed deals.
 
 ---
 
-## ✅ Objective
-
-To help the **Mission Lead** monitor how marketing efforts translate into business outcomes by tracking key performance indicators (KPIs) across the full funnel—from impressions to signed deals.
-
----
-
-## 📁 Data Sources
+## Data Sources
 
 | Table         | Description |
 |---------------|-------------|
-| `WEB_ORDERS`  | Captures website marketing and order metrics. |
-| `CHANNELS`    | Metadata about campaigns and their marketing channels. |
-| `LEADS_FUNNEL`| Tracks lead generation and progression through the sales funnel. |
+| `WEB_ORDERS`  | Tracks marketing and order data. |
+| `CHANNELS`    | Metadata about marketing campaigns and channels. |
+| `LEADS_FUNNEL`| Tracks lead generation and progress in the sales funnel. |
 
 ---
 
-## 🧭 Funnel Overview
+## Funnel Overview
 
-The data models support a funnel-based analysis:
+The analysis follows a funnel-based approach:
 
 1. **Awareness**: Ad Impressions
 2. **Engagement**: Ad Clicks, Website Sessions
@@ -40,30 +31,26 @@ The data models support a funnel-based analysis:
 
 ---
 
-## 📊 Core KPIs & How They're Built
+## Core KPIs & Their Formulas
 
-### 🧾 Marketing Efficiency
+### Marketing Efficiency
 
 | KPI            | Formula |
 |----------------|---------|
-| **Total Spend**         | `SUM(TOTAL_SPEND)` or `SUM(TOTAL_SPEND_EUR)` |
-| **CPC (Cost Per Click)**| `TOTAL_SPEND / TOTAL_CLICKS` |
-| **CPL (Cost Per Lead)** | `TOTAL_SPEND / TOTAL_LEADS` |
-| **CTR (Click-Through Rate)** | `TOTAL_CLICKS / TOTAL_IMPRESSIONS` |
+| **Total Spend**         | `SUM(TOTAL_SPEND)` |
+| **CPC** (Cost Per Click) | `TOTAL_SPEND / TOTAL_CLICKS` |
+| **CPL** (Cost Per Lead) | `TOTAL_SPEND / TOTAL_LEADS` |
+| **CTR** (Click-Through Rate) | `TOTAL_CLICKS / TOTAL_IMPRESSIONS` |
 
----
-
-### 🌐 Website Performance
+### Website Performance
 
 | KPI                    | Formula |
 |------------------------|---------|
-| **Signup Rate**        | `NB_OF_SIGNUPS / NB_OF_SESSIONS` |
-| **Order Conversion**   | `NB_OF_ORDERS / NB_OF_SIGNUPS` |
+| **Signup Rate**         | `NB_OF_SIGNUPS / NB_OF_SESSIONS` |
+| **Order Conversion**    | `NB_OF_ORDERS / NB_OF_SIGNUPS` |
 | **Session → Order Rate** | `NB_OF_ORDERS / NB_OF_SESSIONS` |
 
----
-
-### 🔁 Lead Funnel Efficiency
+### Lead Funnel Efficiency
 
 | KPI                        | Formula |
 |----------------------------|---------|
@@ -73,28 +60,26 @@ The data models support a funnel-based analysis:
 | **Meeting to Signed Rate** | `TOTAL_SIGNED_LEADS / TOTAL_MEETING_DONE` |
 | **Signed to Deal Rate**    | `TOTAL_POS_LITE_DEALS / TOTAL_SIGNED_LEADS` |
 
----
-
-### 📦 Order & Deal Tracking
+### Order & Deal Tracking
 
 | KPI                       | Formula |
 |---------------------------|---------|
-| **POS Items Ordered**     | `SUM(NB_OF_POSLITE_ITEMS_ORDERED)` |
-| **Items Dispatched**      | `SUM(NB_POSLITE_ITEMS_DISPATCHED)` |
-| **Dispatch Rate**         | `NB_POSLITE_ITEMS_DISPATCHED / NB_OF_ORDERS` |
+| **POS Items Ordered**      | `SUM(NB_OF_POSLITE_ITEMS_ORDERED)` |
+| **Items Dispatched**       | `SUM(NB_POSLITE_ITEMS_DISPATCHED)` |
+| **Dispatch Rate**          | `NB_POSLITE_ITEMS_DISPATCHED / NB_OF_ORDERS` |
 
 ---
 
-## 🧱 KPI Calculation Strategy
+## KPI Calculation Strategy
 
-- **Join Data:** Use `CAMPAIGN_ID` to join `WEB_ORDERS`, `LEADS_FUNNEL`, and `CHANNELS`.
-- **Normalize Spend:** Consider converting all currencies to EUR if needed.
-- **Aggregate by:** `DATE`, `COUNTRY`,`PRODUCT`, `CAMPAIGN`, and `CHANNEL` levels.
-- **Derive KPIs:** Use `dbt` to build transformations and expose metrics to dashboards.
+1. **Join Data**: Use `CAMPAIGN_ID` to combine `WEB_ORDERS`, `LEADS_FUNNEL`, and `CHANNELS`.
+2. **Normalize Spend**: Convert all currency values to EUR if necessary.
+3. **Aggregate by**: `DATE`, `COUNTRY`, `PRODUCT`, `CAMPAIGN`, and `CHANNEL`.
+4. **Derive KPIs**: Use `dbt` to perform transformations and generate metrics for reporting.
 
 ---
 
-## 🧮 Example KPI Table (per Campaign/Day)
+## Example KPI Table (per Campaign/Day)
 
 | Date       | Campaign     | Spend | Leads | SQLs | Orders | CTR  | CPL  | SQL Rate | Order Rate |
 |------------|--------------|-------|-------|------|--------|------|------|----------|------------|
@@ -102,77 +87,87 @@ The data models support a funnel-based analysis:
 
 ---
 
+## Suggested Enhancements & Additional KPIs
 
-## ✨ Suggested Enhancements & Additional KPIs
+1. **Product Price Table (for Revenue Estimation)**
 
-#### 🛍️ 1. **Product Price Table (for Revenue Estimation)**
+   Create a table with product prices to estimate revenue and calculate KPIs like:
+   - **Estimated Revenue** = `NB_OF_POSLITE_ITEMS_ORDERED * price_eur`
+   - **ROAS** = `Estimated Revenue / Total Spend`
 
-Introduce a new table for product prices:
+2. **Attribution Beyond Last Click**
 
-| **product**   | **price_eur** | **currency** |
-|---------------|---------------|--------------|
-| POS Lite      | 29.99         | EUR          |
-| SumUp Solo    | 59.99         | EUR          |
+   - Implement multi-touch attribution to track user sessions over time and capture campaign touchpoints.
 
-This allows for the calculation of revenue-based KPIs like:
+3. **Currency Normalization**
 
-- **Estimated Revenue** = `nb_of_poslite_items_ordered * price_eur`
-- **ROAS** = `estimated_revenue / total_spend`
-- **CAC (Customer Acquisition Cost)** = `total_spend / total_signed_leads`
+   - Use an `exchange_rates` table to standardize currency values (e.g., USD, GBP) to EUR.
 
-#### 🧭 2. **Attribution Beyond Last Click**
+4. **Customer Category in Leads Funnel**
 
-To improve understanding of user acquisition:
-
-- Move beyond last-click attribution
-- Consider building multi-touch attribution by tracking:
-  - Sessions over time
-  - Campaign touchpoints per user (e.g., session IDs, cookies, UTM parameters)
-
-
-#### 💱 3. **Currency Normalization**
-
-As `leads_funnel` may use different currencies, normalize all monetary values (spend, revenue) to **EUR** using:
-
-- A daily `exchange_rates` table
-- Or adding a standardized `price_eur` field in `product_prices`
-
-#### 💱 4. **New Column: `customer_category` in Leads Funnel Table**
-
-To improve the granularity of lead data, I suggest adding a **customer category** column to the **Leads Funnel** table. This will allow the marketing team to better segment and analyze lead progression through the funnel based on customer categories. It will enable tracking of leads according to their spending behavior and frequency, which will help in improving lead conversion strategies.
-
-##### **Leads Funnel Table (`leads_funnel`) with `customer_category`**
-
-| **lead_id** | **date** | **country_code** | **campaign_id** | **campaign_name** | **currency** | **product** | **channel_3** | **channel_4** | **channel_5** | **total_impressions** | **total_clicks** | **total_spend** | **total_leads** | **total_fake_leads** | **total_sqls** | **total_meeting_done** | **total_signed_leads** | **total_pos_lite_deals** | **customer_category** |
-|-------------|----------|------------------|-----------------|------------------|--------------|-------------|---------------|---------------|---------------|-----------------------|------------------|-----------------|-----------------|----------------------|----------------|-----------------------|------------------------|------------------------|----------------------|
-| 1           | 2023-04-01 | US               | 101             | Spring Promo     | USD          | POS Lite    | Facebook      | Prospecting   | Video Ad      | 5000                  | 1500             | 500             | 100             | 10                   | 50             | 20                    | 10                     | 5                      | High-Volume           |
-| 2           | 2023-04-02 | UK               | 102             | Summer Blast     | GBP          | POS Lite    | Google        | Remarketing   | Display Ad    | 4000                  | 1300             | 400             | 80              | 8                    | 40             | 15                    | 8                      | 4                      | Medium-Volume         |
-| 3           | 2023-04-03 | DE               | 103             | New Year Sale    | EUR          | POS Lite    | Bing          | Acquisition   | Carousel Ad   | 3000                  | 1200             | 300             | 60              | 6                    | 30             | 10                    | 5                      | 2                      | Low-Volume            |
+   Add a `customer_category` column to track high, medium, and low-volume customers and optimize lead conversion strategies.
 
 ---
 
-##### **Why Add `customer_category` to the Leads Funnel Table?**
+## Data Issues
 
-By adding this **customer category** field, the **Leads Funnel** data becomes more granular, allowing you to:
+Below are the issues identified in the datasets and suggested solutions:
 
-1. **Track Lead Behavior Across Segments**: Understand how **High-Volume**, **Medium-Volume**, and **Low-Volume** customers behave through the funnel.
-   
-2. **Refine Marketing Strategies**: Tailor marketing efforts to each customer category, optimizing campaigns and content for more effective conversions.
+### Web Orders:
+1. **Sessions to Orders Logic**:
+   - There should be a logical relationship between `Sessions` and `Orders`. For example, if `Orders = 0`, there shouldn't be any `POSLite_items_orders`. For instance, on 2022-03-18, `campaign_id = 2022-03-18` has `0 orders` but `10000 poslite_orders`, indicating an inconsistency.
 
-3. **Enhance Lead Scoring**: Apply different lead scoring models based on customer category, which helps prioritize high-potential leads.
+2. **Empty Date and CampaignID**:
+   - Both `Date` and `CampaignID` should not be empty. Any missing values need to be addressed.
 
-4. **Improve Forecasting**: Predict future conversions and sales by understanding the typical behavior of each customer segment.
+3. **String in Numeric Fields**:
+   - There should not be any strings in the `nb_signups` column. On 2022-03-14, `campaign_id = 18461205812` has a string value `'f'`, which causes inconsistency in the data.
 
-
-## 📌 Next Steps
-
-- [ ] Build `staging` models to clean and normalize raw tables
-- [ ] Create `marts` with aggregated KPIs
-- [ ] Design dashboards using these KPIs
-- [ ] Implement tests to ensure metric consistency
+4. **Unexpected Value in Column J**:
+   - On 2022-05-13, `campaign_id = 21250282073` has a value of `1` in column `J`, even though this column is expected to be empty. This needs to be cleaned to avoid issues during data upload to data warehouses.
 
 ---
 
-📂 For more details, check the folders:
-- `models/staging/` — clean data models
-- `models/marts/` — KPI-ready models for dashboarding
+### Channels:
+1. **CampaignID Duplication**:
+   - `CampaignID` should be unique. However, multiple entries exist for the same `campaign_id`, leading to inconsistencies. For example, `campaign_id = 21250282073` has two different campaign names due to an extra space in one of them. Consistent naming conventions should be enforced.
+
+2. **Missing Campaign Names**:
+   - Some campaign entries are missing their campaign names, leading to difficulties in mapping data. Missing values should be cleaned and handled.
+
+3. **Channel Naming Improvements**:
+   - The naming structure for `channel_4` and `channel_5` can be improved for better readability and consistency:
+     - Channel 4: `fb-prospecting` → Suggestion: `prospecting`, as `fb` is already captured in `channel_3`.
+     - Channel 5: `fb-prospecting-landing` → Suggestion: `landing`, as `fb` and `prospecting` are already labeled in `channel_3` and `channel_4`.
+
+---
+
+### Leads Funnel:
+1. **CampaignID Type Inconsistency**:
+   - Some `campaign_id` values have decimals (e.g., `120211150575530066` and `120211150575530066.000000`). Ensure that campaign IDs are consistently stored as integers, excluding any decimal points.
+
+2. **Missing CampaignIDs**:
+   - Some entries are missing `campaign_id` values, while the campaign name is available. This can be controlled at the source level, ensuring that missing campaign IDs are handled and mapped correctly.
+
+3. **Improving Data Consistency**:
+   - The `CampaignID` column in the `Leads Funnel` table should be validated against the list of valid campaign IDs in the campaign table to ensure that all entries can be accurately mapped.
+
+---
+
+## Next Steps
+
+- [ ] Build staging models to clean and normalize raw tables.
+- [ ] Create marts with aggregated KPIs.
+- [ ] Design dashboards to visualize KPIs.
+- [ ] Implement data tests to ensure consistency.
+
+---
+
+## Folder Structure
+
+- `models/staging/` — Clean data models.
+- `models/marts/` — KPI-ready models for dashboarding.
+
+---
+
+📂 For more details, explore the folders above.
