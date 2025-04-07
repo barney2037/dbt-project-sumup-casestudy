@@ -115,7 +115,7 @@ Below are the issues identified in the datasets and suggested solutions:
 
 ### Web Orders:
 1. **Sessions to Orders Logic**:
-   - There should be a logical relationship between `Sessions` and `Orders`. For example, if `Orders = 0`, there shouldn't be any `POSLite_items_orders`. For instance, on 2022-03-18, `campaign_id = 2022-03-18` has `0 orders` but `10000 poslite_orders`, indicating an inconsistency.
+   - There should be a logical relationship between `Sessions` and `Orders`. For example, if `Orders = 0`, there shouldn't be any `POSLite_items_orders`. For instance, on 2022-03-18, `campaign_id = 17300002700 has `0 orders` but `10000 poslite_orders`, indicating an inconsistency.
 
 2. **Empty Date and CampaignID**:
    - Both `Date` and `CampaignID` should not be empty. Any missing values need to be addressed.
