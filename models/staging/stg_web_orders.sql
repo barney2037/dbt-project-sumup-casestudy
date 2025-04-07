@@ -20,17 +20,20 @@ select
 
     -- Textual metadata cleaned and uppercased
     COALESCE(UPPER(TRIM(COUNTRY_CODE)), 'UNKNOWN_COUNTRY') as COUNTRY_CODE,
-    COALESCE(UPPER(TRIM(CAMPAIGN_ID)), 'UNKNOWN_CAMPAIGN') as CAMPAIGN_ID,
+    COALESCE(
+        UPPER(TRIM(REGEXP_REPLACE(CAMPAIGN_ID, '\.\d+$', ''))),
+        'UNKNOWN_CAMPAIGN'
+    ) as CAMPAIGN_ID,
 
     -- Numeric metrics with COALESCE and casting
     COALESCE(TOTAL_SPEND_EUR, 0)::FLOAT as TOTAL_SPEND_EUR,
     COALESCE(NB_OF_SESSIONS, 0)::INT as NB_OF_SESSIONS,
 
-    -- Handle NB_OF_SIGNUPS: If 'f', replace with 0 (or NULL)
+    -- Handle NB_OF_SIGNUPS: If 'f' or empty, treat as 0
     case
-        when NB_OF_SIGNUPS = 'f' then 0  -- Replace 'f' with 0 (or NULL if preferred)
-        when NB_OF_SIGNUPS = '' then 0  -- Replace empty strings with 0
-        else TRY_CAST(NB_OF_SIGNUPS AS INT)  -- Convert to integer if valid
+        when NB_OF_SIGNUPS = 'f' then 0
+        when NB_OF_SIGNUPS = '' then 0
+        else TRY_CAST(NB_OF_SIGNUPS AS INT)
     end as NB_OF_SIGNUPS,
 
     COALESCE(NB_OF_ORDERS, 0)::INT as NB_OF_ORDERS,
